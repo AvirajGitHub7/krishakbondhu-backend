@@ -1,0 +1,29 @@
+# FastAPI & Server
+fastapi
+uvicorn[standard]
+python-multipart
+
+# Database
+motor
+pymongo
+
+# Authentication
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt<4.0.0
+
+# Configuration
+pydantic-settings
+
+# Cloudinary
+cloudinary
+
+# ML / AI
+transformers
+torch
+torchvision
+Pillow
+
+# Utilities
+
+email-validator
