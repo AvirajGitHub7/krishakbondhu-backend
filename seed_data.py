@@ -293,7 +293,7 @@ async def seed_database():
     now = datetime.now(timezone.utc)
 
     # --- Seed disease_info ---
-    print("🌱 Seeding disease_info collection...")
+    print("Seeding disease_info collection...")
     seeded_count = 0
     for disease in DISEASE_DATA:
         existing = await db.disease_info.find_one({"disease_name": disease["disease_name"]})
@@ -303,10 +303,10 @@ async def seed_database():
             await db.disease_info.insert_one(disease)
             seeded_count += 1
 
-    print(f"   ✅ Seeded {seeded_count} new disease entries ({len(DISEASE_DATA)} total)")
+    print(f"   [OK] Seeded {seeded_count} new disease entries ({len(DISEASE_DATA)} total)")
 
     # --- Create default admin user ---
-    print("👤 Creating default admin user...")
+    print("Creating default admin user...")
     admin_email = "admin@krishakbondhu.com"
     existing_admin = await db.users.find_one({"email": admin_email})
 
@@ -323,16 +323,16 @@ async def seed_database():
             "updated_at": now,
         }
         await db.users.insert_one(admin_doc)
-        print(f"   ✅ Admin created: {admin_email} / admin123")
+        print(f"   [OK] Admin created: {admin_email} / admin123")
     else:
-        print(f"   ⏭️  Admin already exists: {admin_email}")
+        print(f"   [SKIP] Admin already exists: {admin_email}")
 
     # Create indexes
     await db.users.create_index("email", unique=True)
     await db.disease_info.create_index("disease_name", unique=True)
 
     client.close()
-    print("\n🎉 Database seeding complete!")
+    print("\nDatabase seeding complete!")
 
 
 if __name__ == "__main__":

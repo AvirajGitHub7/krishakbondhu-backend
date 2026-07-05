@@ -19,9 +19,7 @@ pydantic-settings
 cloudinary
 
 # ML / AI
-transformers
-torch
-torchvision
+httpx
 Pillow
 
 # Utilities
