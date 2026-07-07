@@ -26,6 +26,7 @@ class Settings(BaseSettings):
 
     # HuggingFace
     HF_MODEL_NAME: str = "linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification"
+    HF_TOKEN: str = ""
 
     # Server
     HOST: str = "0.0.0.0"
