@@ -2,7 +2,7 @@ import os
 import httpx
 
 model_name = "linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification"
-API_URL = f"https://api-inference.huggingface.co/models/{model_name}"
+API_URL = f"https://router.huggingface.co/hf-inference/models/{model_name}"
 
 # Create a dummy image
 from PIL import Image
