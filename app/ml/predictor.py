@@ -12,7 +12,7 @@ from app.core.config import settings
 logger = logging.getLogger(__name__)
 
 # We use the inference API directly so we don't load a huge model into memory.
-API_URL = f"https://api-inference.huggingface.co/models/{settings.HF_MODEL_NAME}"
+API_URL = f"https://api-inference.huggingface.co/models/{settings.HF_MODEL_NAME.strip()}"
 headers = {}
 if hf_token := os.getenv("HF_TOKEN"):
     headers["Authorization"] = f"Bearer {hf_token}"
