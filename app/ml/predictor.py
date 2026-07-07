@@ -16,7 +16,9 @@ API_URL = f"https://router.huggingface.co/hf-inference/models/{settings.HF_MODEL
 
 def get_headers():
     """Retrieve headers with dynamically loaded token."""
-    headers = {}
+    headers = {
+        "Content-Type": "application/octet-stream"
+    }
     if settings.HF_TOKEN:
         headers["Authorization"] = f"Bearer {settings.HF_TOKEN.strip()}"
     return headers
@@ -58,6 +60,9 @@ def predict_disease(image_bytes: bytes) -> dict:
             
         if response.status_code == 401:
             raise RuntimeError("Hugging Face API token is invalid, expired, or revoked (401 Unauthorized). Please check your HF_TOKEN.")
+            
+        if response.status_code == 400:
+            raise RuntimeError(f"Hugging Face API returned 400 Bad Request. Details: {response.text}")
             
         if response.status_code == 503:
             raise RuntimeError("The AI model is currently loading on Hugging Face servers. Please try again in about 30 seconds.")
