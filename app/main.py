@@ -40,10 +40,17 @@ app = FastAPI(
 )
 
 # CORS Middleware
+cors_origins = settings.cors_origins_list
+allow_credentials = True
+
+# FastAPI's CORSMiddleware crashes if allow_credentials=True and allow_origins=['*']
+if "*" in cors_origins:
+    allow_credentials = False
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins_list,
-    allow_credentials=True,
+    allow_origins=cors_origins,
+    allow_credentials=allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )

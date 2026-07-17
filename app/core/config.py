@@ -38,7 +38,11 @@ class Settings(BaseSettings):
 
     @property
     def cors_origins_list(self) -> List[str]:
-        return [origin.strip() for origin in self.CORS_ORIGINS.split(",")]
+        origins = [origin.strip() for origin in self.CORS_ORIGINS.split(",") if origin.strip()]
+        default_admin = "https://krishakbondhu-admin.vercel.app"
+        if default_admin not in origins and "*" not in origins:
+            origins.append(default_admin)
+        return origins
 
     model_config = {
         "env_file": ".env",
